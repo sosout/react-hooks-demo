@@ -1,5 +1,5 @@
 import React from 'react';
-import { useI18n, usePerspective, useDoducmentTitle, useWindowSize } from './Hooks';
+import { useI18n, usePerspective, useDoducmentTitle, useWindowSize } from '../hooks';
 import I18nContext from '../context/I18n';
 
 const Card = ({ data }) => {
@@ -8,7 +8,6 @@ const Card = ({ data }) => {
   let { type, title, list, tips } = useI18n(data, I18nContext);
 
   useDoducmentTitle(type + ':' + title);
-
   return (
     <React.Fragment>
       <div className="cards" style={styles.frame}>

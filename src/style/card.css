@@ -1,13 +1,21 @@
-@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800");
+* {
+  padding: 0;
+  margin: 0;
+}
+
 html,
 body {
   height: 100%;
 }
 
+ul, li {
+  list-style: none;
+}
+
 body {
   align-items: center;
-  background: #642b73;
-  background: linear-gradient(to bottom, #c6426e, #642b73);
+  background: #141a48;
+  background: linear-gradient(to bottom, #c6426e, #141a48);
   display: flex;
   font-family: "Open Sans", sans;
   justify-content: center;
@@ -180,6 +188,31 @@ h3, .type__input {
   color: #fff;
   font-size: 18px;
   width: 100px;
+  opacity: 1;
+  text-align: center;
+  line-height: 30px;
+  user-select: none;
+}
+
+.commponent__style {
+  position: absolute;
+  left: -10px;
+  top: 12px;
+}
+
+.commponent__style li {
+  float: left;
+}
+
+.commponent__style li a {
+  display: inline-block;
+  border-radius: 20px;
+  height: 30px;
+  text-decoration: underline;
+  font-weight: 600;
+  color: #fff;
+  font-size: 18px;
+  padding: 0px 10px;
   opacity: 1;
   text-align: center;
   line-height: 30px;

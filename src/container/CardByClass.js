@@ -2,67 +2,67 @@ import React from 'react';
 import I18nContext from '../context/I18n';
 
 export default class Card extends React.Component {
-  static contextType = I18nContext;
+	static contextType = I18nContext
 
-  state = {
-    windowWidth: window.innerWidth,
-    x: 0,
-    y: 0,
-    range: 20
-  }
+	state = {
+		windowWidth: window.innerWidth,
+		x: 0,
+		y: 0,
+		range: 20
+	}
 
-  updateTitle() {
-    let { data } = this.props;
-    let type = this.context === 'cn' ? data.i18n.CN.type : data.type;
-    let title = this.context === 'cn' ? data.i18n.CN.title : data.title;
-    document.title = type + ': ' + title;
-  }
+	updateTitle() {
+		let { data } = this.props
+		let type = this.context === 'cn' ? data.i18n.CN.type : data.type
+		let title = this.context === 'cn' ? data.i18n.CN.title : data.title
+		document.title = type + ': ' + title
+	}
 
-  handleWindowResize = () => {
-    this.setState({
-      windowWidth: window.innerWidth
-    });
-  }
+	handleWindowResize = () => {
+		this.setState({
+			windowWidth: window.innerWidth
+		})
+	}
 
-  handleMouseMove = event => {
-    let width = window.innerWidth;
-    let height = window.innerHeight;
-    let originX = width / 2;
-    let originY = height / 2;
-    let totalX = width / 2;
-    let totalY = height / 2;
+	handleMouseMove = event => {
+		let width = window.innerWidth
+		let height = window.innerHeight
+		let originX = width / 2
+		let originY = height / 2
+		let totalX = width / 2
+		let totalY = height / 2
 
-    let mouseX = event.clientX;
-    let mouseY = event.clientY;
-    let positionX = mouseX - originX;
-    let positionY = mouseY - originY;
-    let x = Math.min(positionX / totalX, 1) * this.state.range;
-    let y = -Math.min(positionY / totalY, 1) * this.state.range;
+		let mouseX = event.clientX
+		let mouseY = event.clientY
+		let positionX = mouseX - originX
+		let positionY = mouseY - originY
+		let x = Math.min(positionX / totalX, 1) * this.state.range
+		let y = -Math.min(positionY / totalY, 1) * this.state.range
 
-    this.setState({
-      x,
-      y
-    })
-  }
+		this.setState({
+			x,
+			y
+		})
+	}
 
-  componentDidMount() {
-    this.updateTitle();
-    window.addEventListener('resize', this.handleWindowResize);
-    window.addEventListener('mousemove', this.handleMouseMove);
-  }
+	componentDidMount() {
+		this.updateTitle()
+		window.addEventListener('resize', this.handleWindowResize)
+		window.addEventListener('mousemove', this.handleMouseMove)
+	}
 
-  componentWillUnmount() {
-    window.addEventListener('resize', this.handleWindowResize);
-    window.addEventListener('mousemove', this.handleMouseMove);
-  }
+	componentWillUnmount() {
+		window.removeEventListener('resize', this.handleWindowResize)
+		window.removeEventListener('mousemove', this.handleMouseMove)
+	}
 
-  componentDidUpdate() {
-    this.updateTitle();
-  }
+	componentDidUpdate() {
+		this.updateTitle()
+	}
 
-  render() {
-    let { data } = this.props;
-    let type = this.context === 'cn' ? data.i18n.CN.type : data.type
+	render() {
+		let { data } = this.props
+		let type = this.context === 'cn' ? data.i18n.CN.type : data.type
 		let title = this.context === 'cn' ? data.i18n.CN.title : data.title
 		let tips = this.context === 'cn' ? data.i18n.CN.tips : data.tips
 		let list = data.list
@@ -76,7 +76,7 @@ export default class Card extends React.Component {
 		let backgroundStyle = {
 			backgroundPosition: `${-x * 2.5}px ${y * 2.5}px`
     }
-    return (
+		return (
 			<React.Fragment>
 				<div className="cards" style={frameStyle}>
 					<h3>{type}</h3>
@@ -97,7 +97,7 @@ export default class Card extends React.Component {
 				</span>
 			</React.Fragment>
 		)
-  }
+	}
 }
 
 const CardItem = ({ data, i18n, styles }) => {

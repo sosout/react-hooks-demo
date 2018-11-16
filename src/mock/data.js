@@ -2,7 +2,7 @@ export default {
   locales: ['en', 'cn'],
 	type: 'Movies',
 	title: 'Miyazaki Hayao',
-	locale: 'USA',
+	locale: 'EN',
 	tips: 'view on desktop for mousemove',
 	i18n: {
 		CN: {

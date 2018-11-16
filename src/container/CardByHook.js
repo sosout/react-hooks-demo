@@ -14,7 +14,7 @@ export default function Card({ data }) {
 	useEffect(() => {
 		let handleWindowResize = () => setWindowWidth(window.innerWidth)
 		window.addEventListener('resize', handleWindowResize)
-		return () => window.addEventListener('resize', handleWindowResize)
+		return () => window.removeEventListener('resize', handleWindowResize)
 	}, [])
 
 	useEffect(() => {
@@ -36,7 +36,7 @@ export default function Card({ data }) {
 			setXY([x, y])
 		}
 		window.addEventListener('mousemove', handleMouseMove)
-		return () => window.addEventListener('mousemove', handleMouseMove)
+		return () => window.removeEventListener('mousemove', handleMouseMove)
 	}, [])
 
 	useEffect(() => {
