@@ -12,70 +12,70 @@ export default class Card extends React.Component {
 	}
 
 	updateTitle() {
-		let { data } = this.props
-		let type = this.context === 'cn' ? data.i18n.CN.type : data.type
-		let title = this.context === 'cn' ? data.i18n.CN.title : data.title
-		document.title = type + ': ' + title
+		const _this = this;
+		const { data } = _this.props;
+		const type = _this.context === 'cn' ? data.i18n.CN.type : data.type;
+		const title = _this.context === 'cn' ? data.i18n.CN.title : data.title;
+		document.title = type + ': ' + title;
 	}
 
 	handleWindowResize = () => {
-		this.setState({
+		const _this = this;
+		_this.setState({
 			windowWidth: window.innerWidth
 		})
 	}
 
 	handleMouseMove = event => {
-		let width = window.innerWidth
-		let height = window.innerHeight
-		let originX = width / 2
-		let originY = height / 2
-		let totalX = width / 2
-		let totalY = height / 2
+		const _this = this;
+		const [width, height]  = [window.innerWidth, window.innerHeight];
+		const [originX, originY, totalX, totalY] = [width / 2, height / 2, width / 2, height / 2];
 
-		let mouseX = event.clientX
-		let mouseY = event.clientY
-		let positionX = mouseX - originX
-		let positionY = mouseY - originY
-		let x = Math.min(positionX / totalX, 1) * this.state.range
-		let y = -Math.min(positionY / totalY, 1) * this.state.range
+		const [mouseX, mouseY]  = [event.clientX, event.clientY];
+		const [positionX, positionY] = [mouseX - originX, mouseY - originY];
+		const { range } = _this.state;
+		const [x, y] = [Math.min(positionX / totalX, 1) * range, -Math.min(positionY / totalY, 1) * range];
 
-		this.setState({
+		_this.setState({
 			x,
 			y
 		})
 	}
 
 	componentDidMount() {
-		this.updateTitle()
-		window.addEventListener('resize', this.handleWindowResize)
-		window.addEventListener('mousemove', this.handleMouseMove)
+		const _this = this;
+		_this.updateTitle();
+		window.addEventListener('resize', _this.handleWindowResize);
+		window.addEventListener('mousemove', _this.handleMouseMove);
 	}
 
 	componentWillUnmount() {
-		window.removeEventListener('resize', this.handleWindowResize)
-		window.removeEventListener('mousemove', this.handleMouseMove)
+		const _this = this;
+		window.removeEventListener('resize', _this.handleWindowResize);
+		window.removeEventListener('mousemove', _this.handleMouseMove);
 	}
 
 	componentDidUpdate() {
-		this.updateTitle()
+		this.updateTitle();
 	}
 
 	render() {
-		let { data } = this.props
-		let type = this.context === 'cn' ? data.i18n.CN.type : data.type
-		let title = this.context === 'cn' ? data.i18n.CN.title : data.title
-		let tips = this.context === 'cn' ? data.i18n.CN.tips : data.tips
-		let list = data.list
-		let { x, y } = this.state
-		let frameStyle = {
+		const _this = this;
+		const { data } = _this.props;
+		const type = _this.context === 'cn' ? data.i18n.CN.type : data.type;
+		const title = _this.context === 'cn' ? data.i18n.CN.title : data.title;
+		const tips = _this.context === 'cn' ? data.i18n.CN.tips : data.tips;
+		const list = data.list;
+		const { x, y, windowWidth } = _this.state;
+		const frameStyle = {
 			transform: `rotateX(${y}deg) rotateY(${x}deg)`
-		}
-		let imageStyle = {
+		};
+		const imageStyle = {
 			transform: `translateX(${-x * 1.5}px) translateY(${y * 1.5}px)`
-		}
-		let backgroundStyle = {
+		};
+		const backgroundStyle = {
 			backgroundPosition: `${-x * 2.5}px ${y * 2.5}px`
-    }
+    };
 		return (
 			<React.Fragment>
 				<div className="cards" style={frameStyle}>
@@ -86,14 +86,14 @@ export default class Card extends React.Component {
 							<CardItem
 								key={item.name}
 								data={item}
-								i18n={this.context}
+								i18n={_this.context}
 								styles={{ image: imageStyle, background: backgroundStyle }}
 							/>
 						)
 					})}
 				</div>
 				<span className="notice">
-					{tips}: {this.state.windowWidth}
+					{tips}: {windowWidth}
 				</span>
 			</React.Fragment>
 		)
@@ -101,10 +101,8 @@ export default class Card extends React.Component {
 }
 
 const CardItem = ({ data, i18n, styles }) => {
-	let name = i18n === 'cn' ? data.i18n.CN.name : data.name
-	let image = data.image
-	let imageStyle = data.imageStyle
-	let background = data.background
+	const name = i18n === 'cn' ? data.i18n.CN.name : data.name;
+	const [image, imageStyle, background] = [data.image, data.imageStyle, data.background];
 	return (
 		<div className="card">
 			<div

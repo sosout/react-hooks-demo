@@ -3,9 +3,9 @@ import { useI18n, usePerspective, useDoducmentTitle, useWindowSize } from '../ho
 import I18nContext from '../context/I18n';
 
 const Card = ({ data }) => {
-  let styles = usePerspective(20);
-  let [ windowWidth ] = useWindowSize();
-  let { type, title, list, tips } = useI18n(data, I18nContext);
+  const styles = usePerspective(20);
+  const [ windowWidth ] = useWindowSize();
+  const { type, title, list, tips } = useI18n(data, I18nContext);
 
   useDoducmentTitle(type + ':' + title);
   return (
@@ -25,7 +25,7 @@ const Card = ({ data }) => {
 }
 
 const CardItem = ({ data, styles }) => {
-  let { name, image, imageStyle, background } = useI18n(data, I18nContext);
+  const { name, image, imageStyle, background } = useI18n(data, I18nContext);
 
   return (
     <div className="card">

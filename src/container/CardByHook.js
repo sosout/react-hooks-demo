@@ -2,36 +2,29 @@ import React, { useState, useEffect, useContext } from 'react'
 import I18nContext from '../context/I18n'
 
 export default function Card({ data }) {
-	let context = useContext(I18nContext)
-	let type = context === 'cn' ? data.i18n.CN.type : data.type
-	let title = context === 'cn' ? data.i18n.CN.title : data.title
-	let tips = context === 'cn' ? data.i18n.CN.tips : data.tips
-	let list = data.list
-	let [windowWidth, setWindowWidth] = useState(window.innerWidth)
-	let [[x, y], setXY] = useState([0, 0])
-	let range = 20
+	const context = useContext(I18nContext);
+	const type = context === 'cn' ? data.i18n.CN.type : data.type;
+	const title = context === 'cn' ? data.i18n.CN.title : data.title;
+	const tips = context === 'cn' ? data.i18n.CN.tips : data.tips;
+	const list = data.list;
+	const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+	const [[x, y], setXY] = useState([0, 0]);
+	const range = 20;
 
 	useEffect(() => {
-		let handleWindowResize = () => setWindowWidth(window.innerWidth)
+		const handleWindowResize = () => setWindowWidth(window.innerWidth)
 		window.addEventListener('resize', handleWindowResize)
 		return () => window.removeEventListener('resize', handleWindowResize)
-	}, [])
+	}, []);
 
 	useEffect(() => {
-		let handleMouseMove = event => {
-			let width = window.innerWidth
-			let height = window.innerHeight
-			let originX = width / 2
-			let originY = height / 2
-			let totalX = width / 2
-			let totalY = height / 2
+		const handleMouseMove = event => {
+			const [width, height]  = [window.innerWidth, window.innerHeight];
+			const [originX, originY, totalX, totalY] = [width / 2, height / 2, width / 2, height / 2];
 
-			let mouseX = event.clientX
-			let mouseY = event.clientY
-			let positionX = mouseX - originX
-			let positionY = mouseY - originY
-			let x = Math.min(positionX / totalX, 1) * range
-			let y = -Math.min(positionY / totalY, 1) * range
+			const [mouseX, mouseY]  = [event.clientX, event.clientY];
+			const [positionX, positionY] = [mouseX - originX, mouseY - originY];
+			const [x, y] = [Math.min(positionX / totalX, 1) * range, -Math.min(positionY / totalY, 1) * range];
 
 			setXY([x, y])
 		}
@@ -43,13 +36,13 @@ export default function Card({ data }) {
 		document.title = type + ': ' + title
 	})
 
-	let frameStyle = {
+	const frameStyle = {
 		transform: `rotateX(${y}deg) rotateY(${x}deg)`
 	}
-	let imageStyle = {
+	const imageStyle = {
 		transform: `translateX(${-x * 1.5}px) translateY(${y * 1.5}px)`
 	}
-	let backgroundStyle = {
+	const backgroundStyle = {
 		backgroundPosition: `${-x * 2.5}px ${y * 2.5}px`
 	}
 

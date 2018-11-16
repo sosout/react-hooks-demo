@@ -17,9 +17,9 @@ const Components = {
 };
 
 const App = ({ data }) => {
-	let style = useHash();
-	let TargetCard = Components[style] || CustomHookCard
-	let [locale, toggleLocale] = useToggle(...data.locales)
+	const style = useHash();
+	const TargetCard = Components[style] || CustomHookCard
+	const [locale, toggleLocale] = useToggle(...data.locales)
 	return (
 		<React.Fragment>
 			<I18nContext.Provider value={locale}>
@@ -31,7 +31,7 @@ const App = ({ data }) => {
 }
 
 const Local = ({ data, toggle }) => {
-	let { locale } = useI18n(data, I18nContext)
+	const { locale } = useI18n(data, I18nContext)
 	return (
     <React.Fragment>
       <ul className="commponent__style">
